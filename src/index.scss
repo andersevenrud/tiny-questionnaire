@@ -1,0 +1,248 @@
+/*
+ * tiny-questionnaire
+ * @copyright Anders Evenrud <andersevenrud@gmail.com>
+ * @license MIT
+ */
+$color-background: #fff;
+$color-font: #222;
+$color-container: #C1CAD6;
+$color-red: #FF1053;
+$color-green: #07A54E;
+$font-size-header: 3em;
+$font-size-big: 2em;
+
+body {
+  font-family: sans-serif;
+  background-color: $color-background;
+  color: $color-font;
+}
+
+.debug {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem;
+  width: 18rem;
+  background-color: lighten($color-font, 70%);
+  max-height: calc(100vh - 2em);
+
+  header {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  table {
+    white-space: nowrap;
+    table-layout: fixed;
+    width: 100%;
+
+    td {
+      padding: 0.25rem;
+
+      &:last-child {
+        text-align: right;
+      }
+    }
+  }
+
+  pre {
+    background-color: #fff;
+    max-height: 20em;
+    overflow: auto;
+    font-size: 12px;
+  }
+
+  &__buttons {
+    display: flex;
+
+    button {
+      flex: 1 1;
+      padding: 0.25rem;
+    }
+  }
+}
+
+.app {
+  font-size: 16px;
+
+  @media(max-width: 400px) {
+    font-size: 14px;
+  }
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  box-sizing: border-box;
+  transform: translate(-50%, -50%);
+  max-width: calc(100% - 1rem);
+  background-color: $color-container;
+  padding: 2rem 4rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 0 0 4px currentColor;
+
+  button,
+  input {
+    font: inherit;
+    color: inherit;
+  }
+
+  @media(max-width: 400px) {
+    padding: 1rem 1rem;
+  }
+}
+
+.question {
+  padding-bottom: 2rem;
+
+  &__header {
+    text-align: center;
+    font-weight: bold;
+    font-size: $font-size-header;
+    margin-bottom: 2rem;
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__inner {
+    font-size: $font-size-big;
+  }
+
+  &__text {
+    padding: 0.25rem;
+  }
+
+  &__choices {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+
+    &__choice {
+      button {
+        margin: 0.5rem;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        border: 2px solid lighten($color-font, 50%);
+        border-radius: 4px;
+        background-color: lighten($color-container, 10%);
+        transition: all 0.5s ease-in-out;
+        outline: none;
+
+        &:hover,
+        &:focus {
+          border-color: $color-font;
+        }
+      }
+
+      &--undefined button {
+        &:active,
+        &:hover {
+          background-color: lighten($color-container, 20%);
+        }
+      }
+
+
+      &--true button {
+        background-color: lighten($color-green, 40%) !important;
+        border-color: $color-green !important;
+      }
+
+      &--false button {
+        background-color: lighten($color-red, 40%) !important;
+        border-color: $color-red !important;
+      }
+    }
+  }
+
+  &__progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1rem;
+    margin-top: 1rem;
+    background-color: lighten($color-red, 20%);
+    overflow: hidden;
+
+    & > div {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      background-color: $color-red;
+      transition: width 0.1s ease-in-out;
+    }
+  }
+}
+
+.answer {
+  margin: 0 0.25rem;
+
+  input {
+    padding: 0.25rem;
+    margin: 0;
+    border: 0 none;
+    border-bottom: 2px solid currentColor;
+    outline: none;
+    text-align: center;
+    background-color: lighten($color-container, 10%);
+    transition: all 0.5s ease-in-out;
+  }
+
+  &--undefined input:focus {
+    background-color: lighten($color-container, 20%);
+  }
+
+  &--true input {
+    background-color: lighten($color-green, 40%);
+    border-color: $color-green;
+  }
+
+  &--false input {
+    background-color: lighten($color-red, 40%);
+    border-color: $color-red;
+  }
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  font-size: $font-size-big;
+  line-height: 2;
+
+  table {
+    td {
+      &:last-child {
+        font-weight: bold;
+        padding-left: 1rem;
+      }
+    }
+
+    tr {
+      &:nth-child(2) td:last-child {
+        color: $color-green;
+      }
+      &:nth-child(3) td:last-child {
+        color: $color-red;
+      }
+    }
+  }
+}
+
+.welcome {
+  button {
+    padding: 0.5rem;
+    font-size: $font-size-big;
+  }
+}
